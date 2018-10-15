@@ -1,0 +1,171 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Ukrainian (Ukraine) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_UKR)
+LANGUAGE LANG_UKRAINIAN, SUBLANG_DEFAULT
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_DOWN                BITMAP                  "Down.bmp"
+
+IDB_UP                  BITMAP                  "Up.bmp"
+
+IDB_BIGPLUS             BITMAP                  "+.bmp"
+
+IDB_LTLPLUS             BITMAP                  "+min.bmp"
+
+IDB_DETAILS             BITMAP                  "detail.bmp"
+
+IDB_TARIFFS             BITMAP                  "tariffs.bmp"
+
+IDB_XBUT                BITMAP                  "xbut.bmp"
+
+IDB_MINBUT              BITMAP                  "minbut.bmp"
+
+IDB_ELECTRO             BITMAP                  "electro.bmp"
+
+IDB_GAS                 BITMAP                  "gas.bmp"
+
+IDB_WATER               BITMAP                  "water.bmp"
+
+IDB_PHONE               BITMAP                  "phone.bmp"
+
+IDB_INET                BITMAP                  "inet.bmp"
+
+IDB_LEGEND              BITMAP                  "legend.bmp"
+
+IDB_DETAILHOV           BITMAP                  "detail_hov.bmp"
+
+IDB_DETAILPRS           BITMAP                  "detail_prs.bmp"
+
+IDB_TARIFFHOV           BITMAP                  "tariffs_hov.bmp"
+
+IDB_TARIFFPRS           BITMAP                  "tariffs_prs.bmp"
+
+IDB_XBUTHOV             BITMAP                  "xbut_hov.bmp"
+
+IDB_XBUTPRS             BITMAP                  "xbut_prs.bmp"
+
+IDB_MINBUTHOV           BITMAP                  "minbut_hov.bmp"
+
+IDB_MINBUTPRS           BITMAP                  "minbut_prs.bmp"
+
+IDB_TARIFFONP           BITMAP                  "tariff_on_prs.bmp"
+
+IDB_TARIFFONH           BITMAP                  "tariff_on_hov.bmp"
+
+IDB_TARIFINET           BITMAP                  "inet_tar.bmp"
+
+IDB_TARIFELE1           BITMAP                  "electro_tar_1.bmp"
+
+IDB_TARIFELE2           BITMAP                  "electro_tar_2.bmp"
+
+IDB_TARIFGAS            BITMAP                  "gas_tar.bmp"
+
+IDB_TARIFWATER          BITMAP                  "water_tar.bmp"
+
+IDB_TARIFPHONE          BITMAP                  "phone_tar.bmp"
+
+IDB_LEGEND_Q			BITMAP					"legend_quest.bmp"
+
+IDB_LEGEND_QE			BITMAP					"legend_quest_empt.bmp"
+
+IDB_ICON				ICON					"icon.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,3,0,1
+ PRODUCTVERSION 0,3,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "042204b0"
+        BEGIN
+            VALUE "CompanyName", "SciInvent"
+            VALUE "FileDescription", "Commune payments calculator"
+            VALUE "FileVersion", "0.3.0.1"
+            VALUE "InternalName", "Communator"
+            VALUE "LegalCopyright", "Copyright (C) 2018"
+            VALUE "OriginalFilename", "Communator.exe"
+            VALUE "ProductName", "Communator"
+            VALUE "ProductVersion", "0.3.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x422, 1200
+    END
+END
+
+#endif    // Ukrainian (Ukraine) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -122,8 +122,8 @@ IDB_ICON				ICON					"icon.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,3,0,1
- PRODUCTVERSION 0,3,0,1
+ FILEVERSION 0,3,0,5
+ PRODUCTVERSION 0,3,0,5
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -140,12 +140,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "SciInvent"
             VALUE "FileDescription", "Commune payments calculator"
-            VALUE "FileVersion", "0.3.0.1"
+            VALUE "FileVersion", "0.3.0.5"
             VALUE "InternalName", "Communator"
             VALUE "LegalCopyright", "Copyright (C) 2018"
             VALUE "OriginalFilename", "Communator.exe"
             VALUE "ProductName", "Communator"
-            VALUE "ProductVersion", "0.3.0.1"
+            VALUE "ProductVersion", "0.3.0.5"
         END
     END
     BLOCK "VarFileInfo"

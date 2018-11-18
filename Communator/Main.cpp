@@ -208,6 +208,11 @@ LRESULT CALLBACK winProc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 	case WM_SIZE:
 		if(wparam == SIZE_RESTORED)
 		{
+			if(tarif_on)
+			{
+				ShowWindow(hsidewnd, SW_SHOW);
+			}
+
 			SetForegroundWindow(hsidewnd);
 			SetForegroundWindow(hwindow);
 		}
@@ -951,6 +956,7 @@ void onNotify(WPARAM wp, LPARAM lp)
 			InvalidateRect(hwnd, NULL, TRUE);
 			// Actual work, not cosmetics
 			ShowWindow(hwindow, SW_MINIMIZE);
+			ShowWindow(hsidewnd, SW_HIDE);
 			break;
 		case XBUTTON:
 			SendMessage(GetDlgItem(hwindow, XBUTIMG), STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)bitmaps[IDB_XBUTHOV]);

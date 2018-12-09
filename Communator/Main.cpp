@@ -539,16 +539,16 @@ void summonChildWindows()
 	ShowWindow(GetDlgItem(hwindow, GRAPHLG), SW_HIDE);
 	// Side window
 	// Edit fields
-	fonts.insert(Pif(18, makeEdit("", Win(22, 17, 76, 31), hsidewnd, TARINET, 18)));
-	makeEdit("", Win(22, 64, 76, 31), hsidewnd, TARELE1, fonts[18]);
-	makeEdit("", Win(22, 111, 76, 31), hsidewnd, TARELE2, fonts[18]);
-	makeEdit("", Win(22, 158, 76, 31), hsidewnd, TARGAS, fonts[18]);
-	makeEdit("", Win(22, 205, 76, 31), hsidewnd, TARWATER, fonts[18]);
-	makeEdit("", Win(22, 252, 76, 31), hsidewnd, TARPHONE, fonts[18]);
-	makeEdit("", Win(202, 64, 76, 31), hsidewnd, VALELE1, fonts[18]);
-	makeEdit("", Win(202, 111, 76, 31), hsidewnd, VALELE2, fonts[18]);
-	makeEdit("", Win(202, 158, 76, 31), hsidewnd, VALGAS, fonts[18]);
-	makeEdit("", Win(202, 205, 76, 31), hsidewnd, VALWATER, fonts[18]);
+	fonts.insert(Pif(18, makeEdit("", Win(18, 17, 84, 31), hsidewnd, TARINET, 18)));
+	makeEdit("", Win(18, 64, 84, 31), hsidewnd, TARELE1, fonts[18]);
+	makeEdit("", Win(18, 111, 84, 31), hsidewnd, TARELE2, fonts[18]);
+	makeEdit("", Win(18, 158, 84, 31), hsidewnd, TARGAS, fonts[18]);
+	makeEdit("", Win(18, 205, 84, 31), hsidewnd, TARWATER, fonts[18]);
+	makeEdit("", Win(18, 252, 84, 31), hsidewnd, TARPHONE, fonts[18]);
+	makeEdit("", Win(198, 64, 84, 31), hsidewnd, VALELE1, fonts[18]);
+	makeEdit("", Win(198, 111, 84, 31), hsidewnd, VALELE2, fonts[18]);
+	makeEdit("", Win(198, 158, 84, 31), hsidewnd, VALGAS, fonts[18]);
+	makeEdit("", Win(198, 205, 84, 31), hsidewnd, VALWATER, fonts[18]);
 	// Icons
 	bitmaps.insert(Pib(IDB_TARIFINET, makeStaticImage(IDB_TARIFINET, Win(135, 18, 29, 29), hsidewnd, TINETIMG)));
 	bitmaps.insert(Pib(IDB_TARIFELE1, makeStaticImage(IDB_TARIFELE1, Win(137, 65, 26, 29), hsidewnd, TELE1IMG)));

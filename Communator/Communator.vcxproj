@@ -123,6 +123,12 @@
     <PreBuildEvent>
       <Message>Incrementing build...</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>call check</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Checking success...</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DB.cpp" />

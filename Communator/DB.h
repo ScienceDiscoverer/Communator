@@ -84,7 +84,7 @@ public:
 
 	void AddMonth(const Month& m) { months_.PushBack(m); }
 
-	void SetTariffs(double e1, double e2, double g, double w, double i, double p);
+	void SetTariffs(double e1, double e2, double et, double g, double gt, double w, double wt, double i, double p);
 
 	Readings GetPastReads() const { return months_.Size() > 0 ? months_.Last().GetReadings() : Readings(); }
 	Readings GetPastPastReads() const { return months_.Size() > 1 ? months_.PreLast().GetReadings() : Readings(); }
@@ -95,10 +95,13 @@ public:
 
 	// Tariff price getters
 	ElectroTariff TariffElectro() const { return electro_.size() > 0 ? electro_.back() : ElectroTariff(); }
+	double TariffElectroTrans() const { return electro_.size() > 0 ? electro_.back().trans_price : 0.0; }
 	double TariffGas() const { return gas_.size() > 0 ? gas_.back().price : 0.0; }
+	double TariffGasTrans() const { return gas_.size() > 0 ? gas_.back().trans_price : 0.0; }
 	double TariffWater() const { return water_.size() > 0 ? water_.back().price : 0.0; }
+	double TariffWaterTrans() const { return water_.size() > 0 ? water_.back().trans_price : 0.0; }
 	double TariffInet() const { return inet_.size() > 0 ? inet_.back().price : 0.0; }
-	double TariffPhone() const { return phone_.size() > 0 ? phone_.back().price : 0.0; }
+	double TariffBankfee() const { return bankfee_.size() > 0 ? bankfee_.back().price : 0.0; }
 
 	// Graph utilities
 	MinMax GetMinMax() const;
@@ -110,8 +113,9 @@ public:
 	int MonthsCount() { return months_.Size(); }
 
 private:
-	void CheckAndSet(vector<ElectroTariff>& e, double e1, double e2);
-	void CheckAndSet(vector<Tariff>& t, double p);
+	void CheckAndSet(vector<ElectroTariff>& e, double e1, double e2, double et);
+	void CheckAndSet(vector<Tariff>& t, double p, double tp);
+	void CheckAndSet(vector<SimpleTariff>& t, double p);
 	void ExportCsv();
 
 	// Data
@@ -120,8 +124,8 @@ private:
 	vector<ElectroTariff> electro_;
 	vector<Tariff> gas_;
 	vector<Tariff> water_;
-	vector<Tariff> inet_;
-	vector<Tariff> phone_;
+	vector<SimpleTariff> inet_;
+	vector<SimpleTariff> bankfee_;
 };
 
 #endif /* DB_H */

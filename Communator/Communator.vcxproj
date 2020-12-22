@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{903C541F-4473-4EEF-8C0B-7BA62F75A0B0}</ProjectGuid>
     <RootNamespace>Communator</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,8 +127,14 @@
       <Command>call check</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Checking success...</Message>
+      <Message>Build done. Checking success...</Message>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>call check</Command>
+    </PreLinkEvent>
+    <PreLinkEvent>
+      <Message>Checking success before linking...</Message>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DB.cpp" />
@@ -148,6 +154,8 @@
   <ItemGroup>
     <Image Include="+.bmp" />
     <Image Include="+min.bmp" />
+    <Image Include="bankfee.bmp" />
+    <Image Include="bankfee_tar.bmp" />
     <Image Include="detail.bmp" />
     <Image Include="detail_hov.bmp" />
     <Image Include="detail_prs.bmp" />
@@ -163,8 +171,6 @@
     <Image Include="minbut.bmp" />
     <Image Include="minbut_hov.bmp" />
     <Image Include="minbut_prs.bmp" />
-    <Image Include="phone.bmp" />
-    <Image Include="phone_tar.bmp" />
     <Image Include="tariffs.bmp" />
     <Image Include="tariffs_hov.bmp" />
     <Image Include="tariffs_prs.bmp" />

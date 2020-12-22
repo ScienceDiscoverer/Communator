@@ -6,13 +6,13 @@
 Month empty_month;
 
 // DataBase implementation
-void DataBase::SetTariffs(double e1, double e2, double g, double w, double i, double p)
+void DataBase::SetTariffs(double e1, double e2, double et, double g, double gt, double w, double wt, double i, double p)
 {
-	CheckAndSet(electro_, e1, e2);
-	CheckAndSet(gas_, g);
-	CheckAndSet(water_, w);
+	CheckAndSet(electro_, e1, e2, et);
+	CheckAndSet(gas_, g, gt);
+	CheckAndSet(water_, w, wt);
 	CheckAndSet(inet_, i);
-	CheckAndSet(phone_, p);
+	CheckAndSet(bankfee_, p);
 }
 
 Month& DataBase::GetLastMonth()
@@ -130,10 +130,10 @@ bool DataBase::Save()
 	r = (bool)ofs.write((char*)water_.data(), sizeof(Tariff) * s);
 	s = (int)inet_.size();
 	r = (bool)ofs.write((char*)&s, sizeof(int));
-	r = (bool)ofs.write((char*)inet_.data(), sizeof(Tariff) * s);
-	s = (int)phone_.size();
+	r = (bool)ofs.write((char*)inet_.data(), sizeof(SimpleTariff) * s);
+	s = (int)bankfee_.size();
 	r = (bool)ofs.write((char*)&s, sizeof(int));
-	r = (bool)ofs.write((char*)phone_.data(), sizeof(Tariff) * s);
+	r = (bool)ofs.write((char*)bankfee_.data(), sizeof(SimpleTariff) * s);
 
 	ofs.close();
 
@@ -193,15 +193,15 @@ bool DataBase::Load()
 	delete[] buff;
 
 	r = (bool)ifs.read((char*)&s, sizeof(int));
-	buff = new char[s*sizeof(Tariff)];
-	ifs.read(buff, s*sizeof(Tariff));
-	inet_.insert(inet_.end(), (Tariff*)buff, (Tariff*)buff+s);
+	buff = new char[s*sizeof(SimpleTariff)];
+	ifs.read(buff, s*sizeof(SimpleTariff));
+	inet_.insert(inet_.end(), (SimpleTariff*)buff, (SimpleTariff*)buff+s);
 	delete[] buff;
 
 	r = (bool)ifs.read((char*)&s, sizeof(int));
-	buff = new char[s*sizeof(Tariff)];
-	ifs.read(buff, s*sizeof(Tariff));
-	phone_.insert(phone_.end(), (Tariff*)buff, (Tariff*)buff+s);
+	buff = new char[s*sizeof(SimpleTariff)];
+	ifs.read(buff, s*sizeof(SimpleTariff));
+	bankfee_.insert(bankfee_.end(), (SimpleTariff*)buff, (SimpleTariff*)buff+s);
 	delete[] buff;
 
 	ifs.close();
@@ -209,41 +209,63 @@ bool DataBase::Load()
 	return r;
 }
 
-void DataBase::CheckAndSet(vector<ElectroTariff>& e, double e1, double e2)
+void DataBase::CheckAndSet(vector<ElectroTariff>& e, double e1, double e2, double et)
 {
 	int s;
 	if((s = (int)e.size()) <= 0)
 	{
 		goto sizezero;
 	}
-	if(e[s-1].less_min == e1 && e[s-1].more_min == e2)
+	if(e[s-1].less_min == e1 && e[s-1].more_min == e2 && e[s-1].trans_price == et)
 	{
 		return;
 	}
 
 sizezero:
-	ElectroTariff et;
-	et.less_min = e1;
-	et.more_min = e2;
-	et.update_time = (int)time(nullptr);
+	ElectroTariff etar;
+	etar.less_min = e1;
+	etar.more_min = e2;
+	etar.trans_price = et;
+	etar.update_time = (int)time(nullptr);
 
-	e.push_back(et);
+	e.push_back(etar);
 }
 
-void DataBase::CheckAndSet(vector<Tariff>& t, double p)
+void DataBase::CheckAndSet(vector<Tariff>& t, double p, double tp)
 {
 	int s;
 	if((s = (int)t.size()) <= 0)
 	{
 		goto sizezero;
 	}
-	if(t[s-1].price == p)
+	if(t[s-1].price == p && t[s-1].trans_price == tp)
 	{
 		return;
 	}
 
 sizezero:
 	Tariff tar;
+	tar.price = p;
+	tar.trans_price = tp;
+	tar.update_time = (int)time(nullptr);
+
+	t.push_back(tar);
+}
+
+void DataBase::CheckAndSet(vector<SimpleTariff>& t, double p)
+{
+	int s;
+	if ((s = (int)t.size()) <= 0)
+	{
+		goto sizezero;
+	}
+	if (t[s - 1].price == p)
+	{
+		return;
+	}
+
+sizezero:
+	SimpleTariff tar;
 	tar.price = p;
 	tar.update_time = (int)time(nullptr);
 
@@ -259,36 +281,36 @@ void DataBase::ExportCsv()
 	ofs << "sep =," << n;
 
 	// Tariffs
-	ofs << "T1|T2,";
+	ofs << "T1|T2|Trs,";
 	for(int i = (int)electro_.size()-1; i >= 0; --i)
 	{
 		ofs << dToStrFull(electro_[i].less_min) << c << dToStrFull(electro_[i].more_min)
-			<< c << dateToStr(electro_[i].update_time) << c;
+			<< c << dToStrFull(electro_[i].trans_price) << c << dateToStr(electro_[i].update_time) << c;
 	}
-	ofs << n << "Gas,";
+	ofs << n << "Gas|Trs,";
 	for(int i = (int)gas_.size()-1; i >= 0; --i)
 	{
-		ofs << dToStrFull(gas_[i].price) << c << dateToStr(gas_[i].update_time) << c;
+		ofs << dToStrFull(gas_[i].price) << c << dToStrFull(gas_[i].trans_price) << c << dateToStr(gas_[i].update_time) << c;
 	}
-	ofs << n << "Water,";
+	ofs << n << "Water|Trs,";
 	for(int i = (int)water_.size()-1; i >= 0; --i)
 	{
-		ofs << dToStrFull(water_[i].price) << c << dateToStr(water_[i].update_time) << c;
-	}
-	ofs << n << "Phone,";
-	for(int i = (int)phone_.size()-1; i >= 0; --i)
-	{
-		ofs << dToStrFull(phone_[i].price) << c << dateToStr(phone_[i].update_time) << c;
+		ofs << dToStrFull(water_[i].price) << c << dToStrFull(water_[i].trans_price) << c << dateToStr(water_[i].update_time) << c;
 	}
 	ofs << n << "Internet,";
 	for(int i = (int)inet_.size()-1; i >= 0; --i)
 	{
 		ofs << dToStrFull(inet_[i].price) << c << dateToStr(inet_[i].update_time) << c;
 	}
+	ofs << n << "Bankfee,";
+	for (int i = (int)bankfee_.size() - 1; i >= 0; --i)
+	{
+		ofs << dToStrFull(bankfee_[i].price) << c << dateToStr(bankfee_[i].update_time) << c;
+	}
 	ofs << n << ",,,,,,,,,,,,,," << n;
 
 	// Months
-	ofs << "Date,Electricity,,,,,Gas,,,Water,,,Phone,Internet,Total" << n;
+	ofs << "Date,Electricity,,,,,Gas,,,Water,,,Internet,Bankfee,Total" << n; // SWAP PREVIOUS DATA
 	ofs << ",Sum,dkW*h,dkW*h,T1,T2,Sum,dm^3,m^3,Sum,dm^3,m^3,Sum,Sum,Sum" << n;
 
 	for(Months::Index i = months_.Front(); i != months_.End(); ++i)

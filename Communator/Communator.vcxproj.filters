@@ -55,9 +55,6 @@
     <Image Include="water.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="phone.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="inet.bmp">
       <Filter>Resource Files</Filter>
     </Image>
@@ -109,7 +106,10 @@
     <Image Include="water_tar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="phone_tar.bmp">
+    <Image Include="bankfee.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bankfee_tar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

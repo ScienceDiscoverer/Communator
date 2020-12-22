@@ -13,7 +13,7 @@
 #define IDB_ELECTRO                     112
 #define IDB_GAS                         113
 #define IDB_WATER                       114
-#define IDB_PHONE                       115
+#define IDB_BANKFEE                     115
 #define IDB_INET                        116
 #define IDB_LEGEND                      117
 #define IDB_DETAILHOV                   118
@@ -32,7 +32,7 @@
 #define IDB_TARIFELE2					130
 #define IDB_TARIFGAS					131
 #define IDB_TARIFWATER					132
-#define IDB_TARIFPHONE					133
+#define IDB_TARIFBANKFEE				133
 #define IDB_LEGEND_Q					134
 #define IDB_LEGEND_QE					135
 #define IDB_ICON						136

@@ -44,16 +44,16 @@ Sums Month::GetSums(const DataBase& db, int sum_type)
 	double e1_2 = ((double)delta_.e1 - e1_perc) * db.TariffElectro().more_min;
 	double e2_2 = ((double)delta_.e2 - e2_perc) * db.TariffElectro().more_min * t2_coef;
 
-	sums_.electro = round2(e1_1 + e1_2 + e2_1 + e2_2);
+	sums_.electro = round2(e1_1 + e1_2 + e2_1 + e2_2 + db.TariffElectroTrans());
 
 	// Compute other sums
-	sums_.gas = round2(db.TariffGas() * delta_.g);
-	sums_.water = round2(db.TariffWater() * delta_.w);
+	sums_.gas = round2(db.TariffGas() * delta_.g + db.TariffGasTrans());
+	sums_.water = round2(db.TariffWater() * delta_.w + db.TariffWaterTrans());
 	sums_.inet = round2(db.TariffInet());
-	sums_.phone = round2(db.TariffPhone());
+	sums_.bankfee = round2(db.TariffBankfee());
 
 	// Compute main sum
-	sums_.main_sum = round2(sums_.electro + sums_.gas + sums_.water + sums_.inet + sums_.phone);
+	sums_.main_sum = round2(sums_.electro + sums_.gas + sums_.water + sums_.inet + sums_.bankfee);
 
 	// Compute percents
 	Deltas pd; 
@@ -173,7 +173,7 @@ string Month::Csv() const
 	// Water
 	out += c + dts(sums_.water) + c + to_string(delta_.w) + c + to_string(reads_.water);
 	// Other
-	out += c + dts(sums_.phone) + c + dts(sums_.inet) + c + dts(sums_.main_sum) + "\n";
+	out += c + dts(sums_.inet) + c + dts(sums_.bankfee) + c + dts(sums_.main_sum) + "\n";
 
 	return out;
 }

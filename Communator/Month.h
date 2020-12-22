@@ -31,12 +31,19 @@ struct Sums
 	double electro;
 	double gas;
 	double water;
-	double phone;
 	double inet;
+	double bankfee;
 	double main_sum;
 };
 
 struct Tariff
+{
+	double price;
+	double trans_price;
+	int update_time;
+};
+
+struct SimpleTariff
 {
 	double price;
 	int update_time;
@@ -46,6 +53,7 @@ struct ElectroTariff
 {
 	double less_min;
 	double more_min;
+	double trans_price;
 	int update_time;
 };
 
@@ -69,8 +77,11 @@ struct ReadTariff
 	Readings rd;
 	double e1;
 	double e2;
+	double et;
 	double g;
+	double gt;
 	double w;
+	double wt;
 	double i;
 	double p;
 	bool state;

@@ -33,6 +33,7 @@ BUILDS:
 0.2.2.6 - implemented 2, 3, 4
 0.2.3.101 - implemented 5, added icon
 0.2.4.12 - in-depth testing for 4 years period, fixed 3, fixed other bugs, ready for beta release; 2926 code lines
+0.3.0.18 - added electro, gaz and water transport costs, changed phone into bank fee
 */
 
 using namespace std;
@@ -489,8 +490,8 @@ void summonChildWindows()
 	makeStaticText("99999.99", Win(326, 371, 149, 59), hwindow, GAS, fonts[24], SS_NOTIFY);
 	makeStaticText("99999.99", Win(564, 371, 149, 59), hwindow, WATER, fonts[24], SS_NOTIFY);
 	// Small Utilities
-	fonts.insert(Pif(20, makeStaticText("999.99", Win(238, 473, 87, 42), hwindow, TELE, 20, SS_NOTIFY)));
-	makeStaticText("999.99", Win(476, 473, 87, 42), hwindow, INTNET, fonts[20], SS_NOTIFY);
+	fonts.insert(Pif(20, makeStaticText("999.99", Win(238, 473, 87, 42), hwindow, INTNET, 20, SS_NOTIFY)));
+	makeStaticText("999.99", Win(476, 473, 87, 42), hwindow, FEE, fonts[20], SS_NOTIFY);
 	// Result
 	fonts.insert(Pif(36, makeStaticText("99999.99", Win(253, 557, 294, 90), hwindow, RESULT, 36, SS_NOTIFY)));
 	// Bottom Info Structure
@@ -528,8 +529,8 @@ void summonChildWindows()
 	bitmaps.insert(Pib(IDB_ELECTRO, makeStaticImage(IDB_ELECTRO, Win(146, 319, 33, 49), hwindow, ICOELECT)));
 	bitmaps.insert(Pib(IDB_GAS, makeStaticImage(IDB_GAS, Win(379, 319, 43, 49), hwindow, ICOGAS)));
 	bitmaps.insert(Pib(IDB_WATER, makeStaticImage(IDB_WATER, Win(621, 319, 35, 49), hwindow, ICOWATER)));
-	bitmaps.insert(Pib(IDB_PHONE, makeStaticImage(IDB_PHONE, Win(266, 444, 31, 26), hwindow, ICOTELE)));
-	bitmaps.insert(Pib(IDB_INET, makeStaticImage(IDB_INET, Win(504, 439, 31, 31), hwindow, ICOINET)));
+	bitmaps.insert(Pib(IDB_INET, makeStaticImage(IDB_INET, Win(266, 439, 31, 31), hwindow, ICOINET)));
+	bitmaps.insert(Pib(IDB_BANKFEE, makeStaticImage(IDB_BANKFEE, Win(504, 439, 31, 31), hwindow, ICOFEE)));
 	// Graph
 	makeStaticEmptyTop(Win(112, 60, 576, 251), hwindow, GRAPH);
 	bitmaps.insert(Pib(IDB_LEGEND, makeStaticImage(IDB_LEGEND, Win(632, 253, 51, 53), hwindow, GRAPHLG)));
@@ -541,21 +542,24 @@ void summonChildWindows()
 	// Edit fields
 	fonts.insert(Pif(18, makeEdit("", Win(18, 17, 84, 31), hsidewnd, TARINET, 18)));
 	makeEdit("", Win(18, 64, 84, 31), hsidewnd, TARELE1, fonts[18]);
-	makeEdit("", Win(18, 111, 84, 31), hsidewnd, TARELE2, fonts[18]);
-	makeEdit("", Win(18, 158, 84, 31), hsidewnd, TARGAS, fonts[18]);
-	makeEdit("", Win(18, 205, 84, 31), hsidewnd, TARWATER, fonts[18]);
-	makeEdit("", Win(18, 252, 84, 31), hsidewnd, TARPHONE, fonts[18]);
+	fonts.insert(Pif(MIN_FONT, makeEdit("", Win(18, 111, 84, 15), hsidewnd, TARELE2, MIN_FONT)));
+	makeEdit("", Win(18, 127, 84, 15), hsidewnd, TARELETR, fonts[MIN_FONT]);
+	makeEdit("", Win(18, 158, 84, 15), hsidewnd, TARGAS, fonts[MIN_FONT]);
+	makeEdit("", Win(18, 174, 84, 15), hsidewnd, TARGASTR, fonts[MIN_FONT]);
+	makeEdit("", Win(18, 205, 84, 15), hsidewnd, TARWATER, fonts[MIN_FONT]);
+	makeEdit("", Win(18, 221, 84, 15), hsidewnd, TARWATERTR, fonts[MIN_FONT]);
+	makeEdit("", Win(18, 252, 84, 31), hsidewnd, TARBANKFEE, fonts[18]);
 	makeEdit("", Win(198, 64, 84, 31), hsidewnd, VALELE1, fonts[18]);
 	makeEdit("", Win(198, 111, 84, 31), hsidewnd, VALELE2, fonts[18]);
 	makeEdit("", Win(198, 158, 84, 31), hsidewnd, VALGAS, fonts[18]);
 	makeEdit("", Win(198, 205, 84, 31), hsidewnd, VALWATER, fonts[18]);
 	// Icons
 	bitmaps.insert(Pib(IDB_TARIFINET, makeStaticImage(IDB_TARIFINET, Win(135, 18, 29, 29), hsidewnd, TINETIMG)));
-	bitmaps.insert(Pib(IDB_TARIFELE1, makeStaticImage(IDB_TARIFELE1, Win(137, 65, 26, 29), hsidewnd, TELE1IMG)));
-	bitmaps.insert(Pib(IDB_TARIFELE2, makeStaticImage(IDB_TARIFELE2, Win(136, 112, 28, 29), hsidewnd, TELE2IMG)));
+	bitmaps.insert(Pib(IDB_TARIFELE1, makeStaticImage(IDB_TARIFELE1, Win(137, 65, 26, 29), hsidewnd, FEE1IMG)));
+	bitmaps.insert(Pib(IDB_TARIFELE2, makeStaticImage(IDB_TARIFELE2, Win(136, 112, 28, 29), hsidewnd, FEE2IMG)));
 	bitmaps.insert(Pib(IDB_TARIFGAS, makeStaticImage(IDB_TARIFGAS, Win(137, 159, 25, 29), hsidewnd, TGASIMG)));
 	bitmaps.insert(Pib(IDB_TARIFWATER, makeStaticImage(IDB_TARIFWATER, Win(140, 206, 20, 29), hsidewnd, TWATERIMG)));
-	bitmaps.insert(Pib(IDB_TARIFPHONE, makeStaticImage(IDB_TARIFPHONE, Win(133, 253, 35, 29), hsidewnd, TPHONEIMG)));
+	bitmaps.insert(Pib(IDB_TARIFBANKFEE, makeStaticImage(IDB_TARIFBANKFEE, Win(133, 253, 35, 29), hsidewnd, TBANKFEEIMG)));
 
 	// Subclass buttons
 	oldWndProc = (WNDPROC)SetWindowLongPtr(GetDlgItem(hwindow, LBUTTON), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
@@ -566,7 +570,7 @@ void summonChildWindows()
 	SetWindowLongPtr(GetDlgItem(hwindow, ELECTRO), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
 	SetWindowLongPtr(GetDlgItem(hwindow, GAS), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
 	SetWindowLongPtr(GetDlgItem(hwindow, WATER), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
-	SetWindowLongPtr(GetDlgItem(hwindow, TELE), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
+	SetWindowLongPtr(GetDlgItem(hwindow, FEE), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
 	SetWindowLongPtr(GetDlgItem(hwindow, INTNET), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
 	SetWindowLongPtr(GetDlgItem(hwindow, RESULT), GWLP_WNDPROC, (LONG_PTR)buttonWinProc);
 	// Subclass graph
@@ -758,7 +762,7 @@ void onNotify(WPARAM wp, LPARAM lp)
 			wcb = MUTIL_BHOV;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
-		case TELE:
+		case FEE:
 			pcb = SUTIL_BHOV;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
@@ -835,7 +839,7 @@ void onNotify(WPARAM wp, LPARAM lp)
 			wcb = MUTIL_B;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
-		case TELE:
+		case FEE:
 			pcb = SUTIL_B;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
@@ -900,7 +904,7 @@ void onNotify(WPARAM wp, LPARAM lp)
 			wct = RESULT_B;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
-		case TELE:
+		case FEE:
 			pct = RESULT_B;
 			InvalidateRect(hwnd, NULL, TRUE);
 			break;
@@ -981,10 +985,10 @@ void onNotify(WPARAM wp, LPARAM lp)
 			InvalidateRect(hwnd, NULL, TRUE);
 			copyToClipboard(WATER);
 			break;
-		case TELE:
+		case FEE:
 			pct = SUTIL_T;
 			InvalidateRect(hwnd, NULL, TRUE);
-			copyToClipboard(TELE);
+			copyToClipboard(FEE);
 			break;
 		case INTNET:
 			ict = SUTIL_T;
@@ -1014,7 +1018,7 @@ bool calcNewMonthUI()
 	
 	Month m = getDate();
 	m.SetReadings(rt.rd);
-	db.SetTariffs(rt.e1, rt.e2, rt.g, rt.w, rt.i, rt.p);
+	db.SetTariffs(rt.e1, rt.e2, rt.et, rt.g, rt.gt, rt.w, rt.wt, rt.i, rt.p);
 
 	Sums sums = m.GetSums(db, SUM_NEW);
 
@@ -1035,7 +1039,7 @@ bool recalcMonth()
 
 	Month& m = db.GetLastMonth();
 	m.SetReadings(rt.rd);
-	db.SetTariffs(rt.e1, rt.e2, rt.g, rt.w, rt.i, rt.p);
+	db.SetTariffs(rt.e1, rt.e2, rt.et, rt.g, rt.gt, rt.w, rt.wt, rt.i, rt.p);
 
 	Sums sums;
 	memset(&sums, 0, sizeof(Sums));
@@ -1102,7 +1106,7 @@ ReadTariff getReadTariff()
 
 	const char* winp = "Wrong input";
 	const char* int_msg = "Readings must contain only integer numbers (0-9) and not 0!";
-	const char* doub_msg = "Tariffs must contain only real numbers (0-9 and\\or one \".\" dot) and not 0!";
+	const char* doub_msg = "Tariffs must contain only real numbers (0-9 and\\or one \".\" dot)!";
 
 	if((e1 = editTxti(VALELE1)) <= 0)
 	{
@@ -1125,33 +1129,48 @@ ReadTariff getReadTariff()
 		return rt;
 	}
 	
-	double te1, te2, tg, tw, ti, tp;
-	if((te1 = editTxtd(TARELE1)) <= 0.0)
+	double te1, te2, tetr, tg, tgtr, tw, twtr, ti, tp;
+	if((te1 = editTxtd(TARELE1)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
 	}
-	if((te2 = editTxtd(TARELE2)) <= 0.0)
+	if((te2 = editTxtd(TARELE2)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
 	}
-	if((tg = editTxtd(TARGAS)) <= 0.0)
+	if ((tetr = editTxtd(TARELETR)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
 	}
-	if((tw = editTxtd(TARWATER)) <= 0.0)
+	if((tg = editTxtd(TARGAS)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
 	}
-	if((ti = editTxtd(TARINET)) <= 0.0)
+	if ((tgtr = editTxtd(TARGASTR)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
 	}
-	if((tp = editTxtd(TARPHONE)) <= 0.0)
+	if((tw = editTxtd(TARWATER)) < 0.0)
+	{
+		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
+		return rt;
+	}
+	if ((twtr = editTxtd(TARWATERTR)) < 0.0)
+	{
+		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
+		return rt;
+	}
+	if((ti = editTxtd(TARINET)) < 0.0)
+	{
+		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
+		return rt;
+	}
+	if((tp = editTxtd(TARBANKFEE)) < 0.0)
 	{
 		MessageBoxA(hsidewnd, doub_msg, winp, MB_OK | MB_ICONWARNING);
 		return rt;
@@ -1163,8 +1182,11 @@ ReadTariff getReadTariff()
 	rt.rd.water = w;
 	rt.e1 = te1;
 	rt.e2 = te2;
+	rt.et = tetr;
 	rt.g = tg;
+	rt.gt = tgtr;
 	rt.w = tw;
+	rt.wt = twtr;
 	rt.i = ti;
 	rt.p = tp;
 	rt.state = true;
@@ -1177,7 +1199,7 @@ void displaySums(const Sums& s, const Deltas& d, Percents p)
 	SendMessage(GetDlgItem(hwindow, ELECTRO), WM_SETTEXT, NULL, (LPARAM)dToStr(s.electro).c_str());
 	SendMessage(GetDlgItem(hwindow, GAS), WM_SETTEXT, NULL, (LPARAM)dToStr(s.gas).c_str());
 	SendMessage(GetDlgItem(hwindow, WATER), WM_SETTEXT, NULL, (LPARAM)dToStr(s.water).c_str());
-	SendMessage(GetDlgItem(hwindow, TELE), WM_SETTEXT, NULL, (LPARAM)dToStr(s.phone).c_str());
+	SendMessage(GetDlgItem(hwindow, FEE), WM_SETTEXT, NULL, (LPARAM)dToStr(s.bankfee).c_str());
 	SendMessage(GetDlgItem(hwindow, INTNET), WM_SETTEXT, NULL, (LPARAM)dToStr(s.inet).c_str());
 
 	SendMessage(GetDlgItem(hwindow, RESULT), WM_SETTEXT, NULL, (LPARAM)dToStr(s.main_sum).c_str());
@@ -1289,9 +1311,12 @@ void setTariffs(const Readings& r)
 	SendMessage(GetDlgItem(hsidewnd, TARINET), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffInet()).c_str());
 	SendMessage(GetDlgItem(hsidewnd, TARELE1), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffElectro().less_min).c_str());
 	SendMessage(GetDlgItem(hsidewnd, TARELE2), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffElectro().more_min).c_str());
+	SendMessage(GetDlgItem(hsidewnd, TARELETR), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffElectro().trans_price).c_str());
 	SendMessage(GetDlgItem(hsidewnd, TARGAS), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffGas()).c_str());
+	SendMessage(GetDlgItem(hsidewnd, TARGASTR), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffGasTrans()).c_str());
 	SendMessage(GetDlgItem(hsidewnd, TARWATER), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffWater()).c_str());
-	SendMessage(GetDlgItem(hsidewnd, TARPHONE), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffPhone()).c_str());
+	SendMessage(GetDlgItem(hsidewnd, TARWATERTR), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffWaterTrans()).c_str());
+	SendMessage(GetDlgItem(hsidewnd, TARBANKFEE), WM_SETTEXT, NULL, (LPARAM)dToStrFull(db.TariffBankfee()).c_str());
 
 	SendMessage(GetDlgItem(hsidewnd, VALELE1), WM_SETTEXT, NULL, (LPARAM)to_string(r.ele_1).c_str());
 	SendMessage(GetDlgItem(hsidewnd, VALELE2), WM_SETTEXT, NULL, (LPARAM)to_string(r.ele_2).c_str());
@@ -1319,7 +1344,7 @@ LRESULT onCtlColorStatic(HDC hdc, HWND hcont)
 		bg = wcb;
 		break;
 
-	case TELE:
+	case FEE:
 		txt = pct;
 		bg = pcb;
 		break;
@@ -1391,9 +1416,12 @@ LRESULT onCtlColorStatic(HDC hdc, HWND hcont)
 	case TARINET:
 	case TARELE1:
 	case TARELE2:
+	case TARELETR:
 	case TARGAS:
+	case TARGASTR:
 	case TARWATER:
-	case TARPHONE:
+	case TARWATERTR:
+	case TARBANKFEE:
 	case VALELE1:
 	case VALELE2:
 	case VALGAS:
@@ -1445,10 +1473,10 @@ void copyResultToClipboard()
 	out += "(G)" + string(buff) + " + ";
 	GetDlgItemText(hwindow, WATER, buff, 100);
 	out += "(W)" + string(buff) + " + ";
-	GetDlgItemText(hwindow, TELE, buff, 100);
-	out += "(T)" + string(buff) + " + ";
 	GetDlgItemText(hwindow, INTNET, buff, 100);
-	out += "(I)" + string(buff);
+	out += "(I)" + string(buff) + " + ";
+	GetDlgItemText(hwindow, FEE, buff, 100);
+	out += "(F)" + string(buff);
 	GetDlgItemText(hwindow, RESULT, buff, 100);
 	out += " = " + string(buff);
 

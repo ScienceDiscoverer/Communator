@@ -32,7 +32,7 @@ HFONT makeStaticText(const string& text, const Win& w, HWND parent, int menu, in
 	int cell_size = -((font_size * GetDeviceCaps(GetDC(parent), LOGPIXELSY)) / 72);
 	
 	font = CreateFontA(cell_size, 0, 0, 0, FW_REGULAR/*FW_DONTCARE*/, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-					   CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
+					   CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
 
 	CreateWindowExA(WS_EX_TOPMOST | WS_EX_TRANSPARENT, "STATIC", text.c_str(), WS_VISIBLE | WS_CHILD | WS_CLIPSIBLINGS | SS_CENTER | SS_CENTERIMAGE,
 					w.x, w.y, w.w, w.h, parent, (HMENU)(UINT_PTR)menu, NULL, NULL);
@@ -56,7 +56,7 @@ HFONT makeStaticText(const string& text, const Win& w, HWND parent, int menu, in
 	int cell_size = -((font_size * GetDeviceCaps(GetDC(parent), LOGPIXELSY)) / 72);
 
 	font = CreateFontA(cell_size, 0, 0, 0, FW_REGULAR/*FW_DONTCARE*/, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-		CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
+		CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
 
 	CreateWindowA("STATIC", text.c_str(), WS_VISIBLE | WS_CHILD | SS_CENTER | SS_CENTERIMAGE | styles,
 				  w.x, w.y, w.w, w.h, parent, (HMENU)(UINT_PTR)menu, NULL, NULL);
@@ -80,7 +80,7 @@ HFONT makeStaticTextW(LPCWSTR text, const Win& w, HWND parent, int menu, int fon
 	int cell_size = -((font_size * GetDeviceCaps(GetDC(parent), LOGPIXELSY)) / 72);
 
 	font = CreateFontW(cell_size, 0, 0, 0, FW_REGULAR/*FW_DONTCARE*/, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-					   CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Impact");
+					   CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Impact");
 
 	CreateWindowExW(WS_EX_TOPMOST | WS_EX_TRANSPARENT, L"STATIC", text, WS_VISIBLE | WS_CHILD | SS_CENTER | SS_CENTERIMAGE,
 					w.x, w.y, w.w, w.h, parent, (HMENU)(UINT_PTR)menu, NULL, NULL);
@@ -138,7 +138,7 @@ HFONT makeEdit(const string& text, const Win& w, HWND parent, int menu, int font
 	int cell_size = -((font_size * GetDeviceCaps(GetDC(parent), LOGPIXELSY)) / 72);
 
 	font = CreateFontA(cell_size, 0, 0, 0, FW_REGULAR/*FW_DONTCARE*/, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-					   CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
+					   CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, "Impact");
 
 	CreateWindowEx(WS_EX_TOPMOST | WS_EX_TRANSPARENT, "EDIT", text.c_str(), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS |  ES_CENTER | ES_AUTOHSCROLL,
 				   w.x, w.y, w.w, w.h, parent, (HMENU)(UINT_PTR)menu, NULL, NULL);

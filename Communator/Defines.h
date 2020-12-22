@@ -3,76 +3,79 @@
 
 // List of color defines and child-window codes
 // Child windows
-#define ELECTRO   2
-#define GAS       3
-#define WATER     4
-#define TELE      5
-#define INTNET    6
-#define RESULT    7
+#define ELECTRO     2
+#define GAS         3
+#define WATER       4
+#define FEE         5
+#define INTNET      6
+#define RESULT      7
 
-#define BOTLEFT   8
-#define BLPERC    9
-#define BLAMOUNT  10
-#define BLKWH     11
-#define BLARROW   12
+#define BOTLEFT     8
+#define BLPERC      9
+#define BLAMOUNT    10
+#define BLKWH       11
+#define BLARROW     12
 
-#define BOTMID    13
-#define BMPERC    14
-#define BMAMOUNT  15
-#define BMM3      16
-#define BMARROW   17
+#define BOTMID      13
+#define BMPERC      14
+#define BMAMOUNT    15
+#define BMM3        16
+#define BMARROW     17
 
-#define BOTRIGHT  18
-#define BRPERC    19
-#define BRAMOUNT  20
-#define BRM3      21
-#define BRARROW   22
+#define BOTRIGHT    18
+#define BRPERC      19
+#define BRAMOUNT    20
+#define BRM3        21
+#define BRARROW     22
 
-#define BIGPLUS1  23
-#define BIGPLUS2  24
-#define LTLPLUS   25
+#define BIGPLUS1    23
+#define BIGPLUS2    24
+#define LTLPLUS     25
 
-#define LBUTTON   26
-#define LBUTIMG   27
-#define RBUTTON   28
-#define RBUTIMG   29
-#define XBUTTON   30
-#define XBUTIMG   39
-#define MINBUT    40
-#define MINBIMG   41
+#define LBUTTON     26
+#define LBUTIMG     27
+#define RBUTTON     28
+#define RBUTIMG     29
+#define XBUTTON     30
+#define XBUTIMG     39
+#define MINBUT      40
+#define MINBIMG     41
 
-#define ICOELECT  42
-#define ICOGAS    43
-#define ICOWATER  44
-#define ICOTELE   45
-#define ICOINET   46
+#define ICOELECT    42
+#define ICOGAS      43
+#define ICOWATER    44
+#define ICOFEE      45
+#define ICOINET     46
 
-#define GRAPHB    47
-#define GRAPH     48
-#define GSCOPE    49
-#define GRAPHLG   50
-#define GRAPHLQ   51
-#define GRAPHLQI  52
+#define GRAPHB      47
+#define GRAPH       48
+#define GSCOPE      49
+#define GRAPHLG     50
+#define GRAPHLQ     51
+#define GRAPHLQI    52
 
 // Side Window
 // Tariff Edit forms
-#define TARINET   53
-#define TARELE1   54
-#define TARELE2   55
-#define TARGAS    56
-#define TARWATER  57
-#define TARPHONE  58
-#define VALELE1   59
-#define VALELE2   60
-#define VALGAS    61
-#define VALWATER  62
+#define TARINET     53
+#define TARELE1     54
+#define TARELE2     55
+#define TARELETR    56
+#define TARGAS      57
+#define TARGASTR    58
+#define TARWATER    59
+#define TARWATERTR  60
+#define TARBANKFEE  61
+#define VALELE1     62
+#define VALELE2     63
+#define VALGAS      64
+#define VALWATER    65
 // Edit Icons
-#define TINETIMG  63
-#define TELE1IMG  64
-#define TELE2IMG  65
-#define TGASIMG   66
-#define TWATERIMG 67
-#define TPHONEIMG 68
+#define TINETIMG    66
+#define FEE1IMG     67
+#define FEE2IMG     68
+#define TGASIMG     69
+#define TWATERIMG   70
+#define TBANKFEEIMG 71
 
 // Colors
 #define MAIN_BG    0xBEBEBE
@@ -112,5 +115,8 @@
 
 // Messages
 #define NET_EVENT 4269
+
+// Font Sizes
+#define MIN_FONT 10
 
 #endif /* DEFINES_H */

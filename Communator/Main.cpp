@@ -1,4 +1,5 @@
 #include <string>
+#include <sstream>
 #include <map>
 #include "Defines.h"
 #include "Helpers.h"
@@ -1453,6 +1454,19 @@ void copyToClipboard(int menu)
 {
 	char buff[100];
 	GetDlgItemText(hwindow, menu, buff, 100);
+
+	if (menu == GAS)
+	{
+		string dat(buff);
+		double res = stod(dat) - db.TariffGasTrans();
+
+		ostringstream out;
+		out.precision(2);
+		out << fixed << round(res * 100) / 100.0;
+
+		memcpy(buff, out.str().c_str(), out.str().size());
+	}
+
 	const int l = (int)strlen(buff) + 1;
 	HGLOBAL hmem = GlobalAlloc(GMEM_MOVEABLE, l);
 	memcpy(GlobalLock(hmem), buff, l);
